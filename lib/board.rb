@@ -1,7 +1,7 @@
 
 require 'pry'
 class Board
-
+attr_reader :board
      
       @@wining_combos = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
@@ -49,23 +49,21 @@ class Board
              xpos<<index if box.mark=="X"
              opos<<index if box.mark=="O"
       end
-      test=@@wining_combos.detect {|combo| (combo-xpos).empty? || (combo-opos).empty? } 
-
-      #Iterates throu the winig combos array and checks if any wining combo is included within the xpos or opos arrays . If so returns the wiinning mark if not returns nill
-       test != nil ? @board[test.first].mark : false
-       #If above statements is nil meaning no one won the game yet the won? mehtod will return false
+      #Iterates through the winnig combos array and checks if any wining combo is included within the xpos or opos arrays .
+      test=@@wining_combos.detect {|combo| (combo-xpos).empty? || (combo-opos).empty? }  
+      #If above statements is nil meaning no one won the game yet the won? mehtod will return false. Else it will return the winning players mark.
+      test != nil ? @board[test.first].mark : false
      end
 
       #checks to see if the game is at a tie . 
     def tie?
-     full? && (won? == false) 
+     full? && (won? == false )
     end
 
     def move(box_num,player)
       if taken?(@board[box_num.to_i-1]) 
         puts "This box is taken, please choose another box." 
         new_choice = player.turn
-        binding.pry
         move(new_choice,player)
       else    
         @board[box_num.to_i-1].mark = player.mark

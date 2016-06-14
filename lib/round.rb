@@ -21,15 +21,17 @@ class Round
 
 
   def current
-    if @turn_count.even? 
-       @player
+    if @turn_count.even?
+     @computer 
+       
     else 
-      @computer
+     @player
     end
   end
 
 
   def turn 
+    current.board=@current_board
     @current_board.move(current.turn,current) 
     #@current_board.display_board
     @turn_count += 1
