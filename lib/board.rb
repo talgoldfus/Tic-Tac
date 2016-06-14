@@ -58,13 +58,14 @@ class Board
 
       #checks to see if the game is at a tie . 
     def tie?
-     full? && won? != false 
+     full? && (won? == false) 
     end
 
     def move(box_num,player)
       if taken?(@board[box_num.to_i-1]) 
         puts "This box is taken, please choose another box." 
         new_choice = player.turn
+        binding.pry
         move(new_choice,player)
       else    
         @board[box_num.to_i-1].mark = player.mark
