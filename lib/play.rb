@@ -16,7 +16,7 @@ end
 
 def start_round
   
-  while ( @round.current_board.won? == false ) && (@round.current_board.tie? == false )
+  while ( @round.current_board.won? == false ) && (@round.current_board.tie? == false)
     @round.turn
     @round.current_board.display_board
   end
