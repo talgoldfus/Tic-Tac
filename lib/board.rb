@@ -1,6 +1,6 @@
 require 'pry'
 class Board
-      attr_accessor :xpos , :opos
+      attr_accessor :xpos , :opos ,:board
      
       @@wining_combos = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]]
 
@@ -42,14 +42,14 @@ class Board
       @xpos=[]
       @opos=[]
       @board.each_with_index do |box,index|
-             xpos<<index if box.mark=="X"
-             opos<<index if box.mark=="O"
+             @xpos<<index if box.mark=="X"
+             @opos<<index if box.mark=="O"
       end 
     end
 
-
     #Checks to see if the the game has been won . If so returns the winning mark . If not returns false
     def won?
+      current_positions
       #Iterates throu the winnig combos array and checks if any wining combo is included within the xpos or opos arrays . If so returns the wiinning mark if not returns nill
       test=@@wining_combos.detect {|combo| (combo-xpos).empty? || (combo-opos).empty? } 
        #If bellow statements is nil meaning no one won the game yet the won? mehtod will return false
@@ -59,18 +59,6 @@ class Board
       #checks to see if the game is at a tie . 
     def tie?
      full? && (won? == false) 
-    end
-
-    def move(box_num,player)
-    players_box=@board[box_num.to_i-1]
-
-      if taken?(players_box) 
-        puts "This box is taken, please choose another box." 
-        current_player = player.turn
-        move(current_player,player)
-      else    
-        @board[players_box].mark = player.mark
-      end
     end
 
     def new_round

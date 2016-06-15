@@ -9,4 +9,3 @@ class Space
   end
 
 end
-

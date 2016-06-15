@@ -3,15 +3,25 @@ require_relative 'round.rb'
 require_relative 'opponent.rb'
 require_relative 'player.rb'
 require_relative 'board.rb'
-require_relative 'play.rb'
+require_relative 'services/make_move.rb'
+require_relative 'services/start_playing.rb'
+require_relative 'services/initiate_game.rb'
+require_relative 'services/computer_ai.rb'
 
 
+  class Runner
 
-require 'pry'
+    def run
+    tic_tac= Initiate_game.new
+    game=tic_tac.new_game
+    game.start_playing
+    end
+
+  end
 
 
-game=Play.new 
-game.how_many_rounds?
-game.start_playing
+  Runner.new.run
+
+
 
 
