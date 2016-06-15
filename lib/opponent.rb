@@ -34,21 +34,34 @@ class Opponent
   def best_move
 
      #Checks to see if its the computers first move if it is it chooses the middle spot unless its taken and then it generates a random number.
-      if (my_positions.length== 0 && board.taken?(@board.board[8]) == false)
-        return 9
-      elsif (my_positions.length== 0 && board.taken?(@board.board[8]))
-        return rand(1..9) 
-      end
+      return first_choice if first_turn?
       #1)Iterate through the opponents plays and checks if they exsist in any of the winning combos .
       #1B) Returns an array of possible combos that opponent does not block
       combo_options
       #If there is no other winning moves to play just picks a random number till game is tied.
-      return rand(1..9) if combo_options.first== nil
+      
       #Creates an array with possible combos that comuter already has marks in.
       prefered_combos
       #Returns the best combo - the combo with the most computer marks currently on the board
       #choose_number(best_combo,my_positions)
       (op_kill_move == false) ? next_move : op_kill_move+1
+  end
+
+
+  def first_turn?
+      my_positions.length == 0 ? true : false
+  end 
+
+  def first_choice
+    if (first_turn? && !box_taken?(4))
+        return 5
+    elsif ( first_turn? && box_taken?(4))
+        return 9 
+    end
+  end
+
+  def box_taken?(box_num)
+    board.taken?(@board.board[box_num])
   end
 
   def combo_options   
@@ -73,6 +86,7 @@ class Opponent
 
 
   def next_move
+  return rand(1..9) if combo_options.first== nil
   (best_combo.first-my_positions).first + 1
   end
 
