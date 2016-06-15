@@ -35,7 +35,7 @@ class Round
     @turn_count += 1
   end
 
-  def declare_winner
+  def declare_winnercd 
     if @current_board.won? == @player.mark
       @player
     else
