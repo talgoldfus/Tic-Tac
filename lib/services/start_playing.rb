@@ -26,10 +26,15 @@ def start_round
   @rounds += 1
 end
 
+
+def new_round
+      9.times {|num| board.board[num]=Space.new}
+end
+
 def start_playing
 
     while (@game_opponent.score != @final_score) && ( @game_player.score != @final_score)
-      board.new_round
+      new_round
       start_round
     end
 

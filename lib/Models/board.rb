@@ -61,9 +61,6 @@ class Board
      full? && (won? == false) 
     end
 
-    def new_round
-      9.times {|num| @board[num]=Space.new}
-    end
 end
 
 
